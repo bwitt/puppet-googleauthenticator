@@ -23,19 +23,19 @@ define googleauthenticator::pam (
     include googleauthenticator::sshd
   }
 
-  case $facts['os']['name'] {
-    /Debian|Ubuntu/ : {
+  case $facts['os']['family'] {
+    'Debian' : {
       googleauthenticator::pam::debian { $name:
         ensure => $ensure,
         mode   => $mode,
       }
     }
-    /RedHat|CentOS/ : {
+    'RedHat' : {
       googleauthenticator::pam::redhat { $name:
         ensure => $ensure,
         mode   => $mode,
       }
     }
-    default         : { fail("not supported on ${facts['os']['name']}") }
+    default  : { fail("not supported on ${facts['os']['name']}") }
   }
 }
