@@ -52,7 +52,10 @@ define googleauthenticator::pam::redhat (
     'absent': {
       augeas { "Purge existing google-authenticator from ${name}":
         context => "/files/etc/pam.d/${name}",
-        changes => 'rm include[. =~ regexp("google-authenticator.*")]',
+        changes => [
+          'rm include[. =~ regexp("google-authenticator.*")]',
+          'rm *[module =~ regexp("google-authenticator.*")]',
+        ],
         notify  => Service['sshd'],
       }
     }
