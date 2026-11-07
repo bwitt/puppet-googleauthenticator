@@ -8,6 +8,8 @@
 # - *secret_key*: the secret key for the TOTP verification;
 # - *user*: optionally, force the user name
 #     (otherwise, $name is used)
+# - *group*: optionally, force the group name
+#     (otherwise, the user name is used)
 # - *file*: optionally, force the configuration file
 #     (otherwise, ~/.google_authenticator is used);
 # - *rate_limit*: optionally, set rate limit
@@ -48,8 +50,8 @@ define googleauthenticator::user (
   }
 
   $real_group = $group ? {
-    undef   => $name,
-    default => $user,
+    undef   => $real_user,
+    default => $group,
   }
 
   # $real_file can be forced by specifying $file
