@@ -16,6 +16,7 @@ Requirements
 ------------
 
 * Service['ssh'] must be managed for the node.
+* On RedHat family systems, EPEL must be configured for the google-authenticator package.
 
 Simple example
 --------------
